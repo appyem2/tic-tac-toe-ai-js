@@ -1,4 +1,14 @@
+// Agent Program
+/* The following classes are the Agent Programs*/
+/* The Minimax Algorithm */
 class Minimax {
+  /**
+   *
+   * @param {Array} board - Board array
+   * @param {Number} max_depth - Maximum depth
+   * @param {String} player - AI/Human
+   * @param {Number} grid - Grid dimension
+   */
   constructor(board, max_depth, player, grid) {
     this.player = player;
     this.max_depth = max_depth;
@@ -8,6 +18,7 @@ class Minimax {
   }
   evaluate() {
     var j;
+    /* Vertical Wins */
     for (var i = 0; i < this.grid; i = i + 1) {
       for (j = 1; j < this.grid; j++) {
         if (this.board[i] != this.board[i + this.grid * j]) j = 1000;
@@ -17,6 +28,7 @@ class Minimax {
         else if (this.board[i] === this.opponent) return -10;
       }
     }
+    /* Horizontal Wins */
     for (var i = 0; i <= this.board.length - this.grid + 1; i = i + this.grid) {
       for (j = 1; j < this.grid; j++) {
         if (this.board[i] != this.board[i + j]) j = 1000;
@@ -26,6 +38,7 @@ class Minimax {
         else if (this.board[i] === this.opponent) return -10;
       }
     }
+    /* Diagonal Wins */
     var i = 0;
     for (j = 0; j < this.board.length; j = j + (this.grid + 1)) {
       if (this.board[i] != this.board[j]) j = 1000;
@@ -46,18 +59,26 @@ class Minimax {
     }
     return 0;
   }
+  /**
+   *
+   * @param {Number} depth - The depth of the game.
+   * @param {Boolean} isMax - Whether player is maximising or minimising.
+   */
   minimax(depth, isMax) {
     var score = this.evaluate();
     if (score === 10) return score - depth;
     if (score === -10) return depth + score;
     var m = [];
+    /* Available Moves */
     for (var j = 0; j < this.board.length; j++) {
       if (this.board[j] == "") {
         m.push(j);
       }
     }
+    /* Checking for terminal State*/
     if (m.length === 0 || depth === this.max_depth) return 0;
     if (isMax) {
+      /* Maximising Player */
       var best = -1000;
       for (var i = 0; i < this.board.length; i++) {
         if (this.board[i] == "") {
@@ -68,6 +89,7 @@ class Minimax {
       }
       return best;
     } else {
+      /* Minimising Player */
       var best = 1000;
       for (var i = 0; i < this.board.length; i++) {
         if (this.board[i] == "") {
@@ -86,7 +108,7 @@ class Minimax {
     for (var i = 0; i < this.board.length; i++) {
       if (this.board[i] == "") {
         this.board[i] = this.player;
-        bestM = this.minimax(0, false);
+        bestM = this.minimax(0, false); /* Calling Minimax*/
         this.board[i] = "";
         if (bestM > bestVal) {
           idx = i;
@@ -100,6 +122,13 @@ class Minimax {
 
 //Alpha Beta Pruning.
 class Minimaxab {
+  /**
+   *
+   * @param {Array} board - Board array
+   * @param {Number} max_depth - Maximum depth
+   * @param {String} player - AI/Human
+   * @param {Number} grid - Grid dimension
+   */
   constructor(board, max_depth, player, grid) {
     this.player = player;
     this.max_depth = max_depth;
@@ -107,6 +136,13 @@ class Minimaxab {
     this.opponent = this.player == "X" ? "O" : "X";
     this.grid = grid;
   }
+  /**
+   *
+   * @param {Number} depth - depth
+   * @param {Boolean} isMax - Whether player is maximising or minimising.
+   * @param {Number} alpha - best value of maximiser at the current level or above.
+   * @param {Number} beta - best value of minimiser at the current level or above.
+   */
   minimaxab(depth, isMax, alpha, beta) {
     var objmini = new Minimax(this.board, depth, this.player, this.grid);
     var score = objmini.evaluate();
@@ -176,6 +212,13 @@ class Minimaxab {
 
 //Negamax with Alpha-Beta Pruning.
 class NegaMax {
+  /**
+   *
+   * @param {Array} board - Board array
+   * @param {Number} max_depth  - Maximum depth
+   * @param {String} player - AI/Human
+   * @param {Number} grid - Grid dimension
+   */
   constructor(board, max_depth, player, grid) {
     this.player = player;
     this.max_depth = max_depth;
@@ -185,12 +228,20 @@ class NegaMax {
     this.grid = grid;
   }
   begin() {
-    let ind = this.negamax(0, "X", -1000, 1000, 1);
+    let value = this.negamax(0, "X", -1000, 1000, 1);
     return this.Move;
   }
   changeTurn(player) {
     return player === "X" ? "O" : "X";
   }
+  /**
+   *
+   * @param {Number} depth - current depth
+   * @param {String} player - AI/Human
+   * @param {Number} alpha - best value of maximiser at the current level or above.
+   * @param {Number} beta - best value of minimiser at the current level or above.
+   * @param {Number} s - to change the sign when evaluating score.
+   */
   negamax(depth, player, alpha, beta, s) {
     var objmin = new State(this.board, this.max_depth, player, "", this.grid);
     if (depth >= this.max_depth || objmin.isTerminal()) {

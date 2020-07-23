@@ -1,3 +1,8 @@
+/* Multiplayer Version */
+/**
+ * @param {Array} board - the board of the game.
+ * @param {Number} grid - the size of grid.
+ */
 class Multiplayer {
   constructor(board, grid) {
     this.board = board;
@@ -14,6 +19,8 @@ class Multiplayer {
     var _self = this;
     var p = this.player;
     cells = document.querySelectorAll(".cell");
+    document.querySelector(".endgame").style.display = "block";
+    document.querySelector(".endgame .text").innerText = `Player O's turn!`;
     cells.forEach((cell, index) => {
       cells[index].addEventListener(
         "click",
@@ -22,9 +29,13 @@ class Multiplayer {
           if (_self.board[index] != "" || obj.isTerminal()) {
             return false;
           } else {
+            document.querySelector(
+              ".endgame .text"
+            ).innerText = `Player ${_self.player}'s turn!`;
             p = _self.player == "X" ? "O" : "X";
             _self.board[index] = p;
             document.getElementById(index).innerText = p;
+            /* Checking if terminal state */
             if (obj.isTerminal()) {
               document
                 .querySelector("#help")
@@ -44,11 +55,14 @@ class Multiplayer {
         false
       );
     });
+    /*Help function to allow using hints for next move. */
     document.querySelector("#help").addEventListener(
       "click",
       function helper() {
         var symbol = _self.player == "X" ? "O" : "X";
-        var objct = new NegaMax(_self.board, 3, symbol, _self.grid);
+        /* Creating an object of the NegaMax class.*/
+        var objct = new NegaMax(_self.board, 5, symbol, _self.grid);
+        /* Calling the begin() function of NegaMax class */
         var b = objct.begin();
         if (b !== "" && b >= 0 && b <= _self.grid * _self.grid - 1) {
           document.getElementById(b).style.backgroundColor = "grey";

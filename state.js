@@ -1,6 +1,14 @@
+/* This class represents the board and contains related functions */
+/**
+ * @param {Array} state - Current state of board.
+ * @param {Number} depth - Maximum depth.
+ * @param {String} starting - Starting player.
+ * @param {String} algo - Algorithm to be used.
+ * @param {Number} grid - Grid size
+ */
 class State {
   constructor(state, depth, starting, algo, grid) {
-    this.state = state;
+    this.state = state; //
     this.max_depth = parseInt(depth);
     this.player_turn = starting;
     this.algo = algo;
@@ -8,29 +16,37 @@ class State {
   }
   start() {
     if (this.player_turn === "X") {
-      this.state[0] = "X";
-      document.getElementById("0").innerText = "X";
+      /* If the first player is AI,use the corners of board */
+      var psbl = [];
+      psbl.push(0);
+      psbl.push(this.grid - 1);
+      psbl.push(this.state.length - 1);
+      psbl.push(this.state.length - this.grid);
+      var idx = Math.floor(Math.random() * psbl.length);
+      this.state[psbl[idx]] = "X";
+      document.getElementById(psbl[idx]).innerText = "X";
       this.player_turn = "O";
     }
     var _self = this;
     var k = 1;
     var x = document.querySelectorAll(".cell");
+    // Sensor
     x.forEach((cell, index) => {
       x[index].addEventListener(
         "click",
         function play() {
           if (_self.state[index] != "" || _self.isTerminal()) return false;
           if (_self.player_turn === "O") {
-            _self.player_turn = "X";
+            /* Human's Turn */ _self.player_turn = "X";
             if (index < _self.state.length && _self.state[index] === "") {
               _self.state[index] = "O";
 
               document.getElementById(index).innerText = "O";
             }
             if (_self.isTerminal()) {
+              /* Checking if terminal*/
               let { winner, direction, row } = _self.isTerminal();
               _self.declareWinner(winner, direction, row);
-
               for (var i = 0; i < x.length; i++) {
                 x[i].removeEventListener("click", _self.play, false);
               }
@@ -38,14 +54,17 @@ class State {
             }
           }
           if (_self.player_turn === "X") {
-            var state1 = _self.state.slice();
+            /* AI's Turn */ var state1 = _self.state.slice();
             var best1;
             if (_self.max_depth === 1) {
+              /* If depth is 1,using random function */
               var arr = _self.getAvailMoves();
               var r = Math.floor(Math.random() * arr.length);
               best1 = arr[r];
             } else {
               if (_self.algo === "minimax") {
+                /* Minimax algorithm */
+                /* Creating an object of the Minimax class.*/
                 var objc = new Minimax(
                   state1,
                   _self.max_depth,
@@ -54,7 +73,10 @@ class State {
                 );
                 best1 = objc.bestMove();
               } else if (_self.algo === "negamax") {
-                if (_self.grid === 3) k = _self.max_depth;
+                /* NegaMax algorithm */
+
+                if (_self.grid == 3) k = _self.max_depth;
+                /* Creating an object of the NegaMax class.*/
                 var objc = new NegaMax(
                   state1,
                   k,
@@ -64,6 +86,8 @@ class State {
                 best1 = objc.begin();
                 if (_self.grid !== 3) k++;
               } else if (_self.algo === "alphabeta") {
+                /* Minimax with Alpha Beta Pruning */
+                /* Creating an object of the Minimaxab class.*/
                 var objc = new Minimaxab(
                   state1,
                   _self.max_depth,
@@ -79,6 +103,7 @@ class State {
             }
             _self.player_turn = "O";
             if (_self.isTerminal()) {
+              /* Checking if terminal*/
               let { winner, direction, row } = _self.isTerminal();
               _self.declareWinner(winner, direction, row);
               for (var i = 0; i < x.length; i++) {
@@ -93,6 +118,7 @@ class State {
     });
   }
   getAvailMoves() {
+    /* Get empty squares */
     const moves = [];
     for (var i = 0; i < this.state.length; i++) {
       if (this.state[i] === "") moves.push(i);
@@ -100,6 +126,7 @@ class State {
     return moves;
   }
   isEmpty() {
+    /* Check if board is empty */
     for (var i = 0; i < this.state.length; i++) {
       if (this.state[i] != "") return false;
     }
@@ -107,12 +134,21 @@ class State {
   }
 
   isFull() {
+    /* Check if board is full */
     for (var i = 0; i < this.state.length; i++) {
       if (this.state[i] == "") return false;
     }
     return true;
   }
+  // Actuator
+  /**
+   *
+   * @param {String} winner - The winner.
+   * @param {String} direction - horizontal/vertical/diagonal.
+   * @param {Number} row - The row/col/diagonal.
+   */
   declareWinner(winner, direction, row) {
+    /* To highlight winning squares */
     var x = document.querySelectorAll(".cell");
     if (winner == "draw") {
       for (var i = 0; i < x.length; i++) {
@@ -122,16 +158,19 @@ class State {
       document.querySelector(".endgame .text").innerText = "Draw";
     } else {
       var j, i;
+      /* Horizontal wins*/
       if (direction == "H") {
         j = row - 1;
         j = j * this.grid;
         i = 1;
         if (row == 1) j = 0;
       }
+      /* Vertical Wins*/
       if (direction == "V") {
         j = row - 1;
         i = this.grid;
       }
+      /* Diagonal Wins*/
       if (direction == "D") {
         if (row == 1) {
           j = 0;
@@ -146,14 +185,16 @@ class State {
         j += i;
       }
       var s = document.getElementById("player");
+      s = s.options[s.selectedIndex].value;
       document.querySelector(".endgame").style.display = "block";
       if (s == "sp")
         document.querySelector(".endgame .text").innerText =
-          winner == "O" ? "You win!" : "You lose.";
+          winner == "O" ? "You win!" : "You lose!";
       else
         document.querySelector(".endgame .text").innerText =
           winner == "O" ? "Player O wins!" : "Player X wins!";
     }
+    // Preparing for next game
     for (var i = 0; i < this.grid * this.grid; i++) this.state = "";
     document.querySelector(".player").style.display = "block";
     var s = document.getElementById("player");
@@ -162,22 +203,28 @@ class State {
     document.querySelector(".singleplayer").style.display = "none";
   }
   isTerminal() {
+    /* Check if board in terminal state that is winner found,tie or full*/
     var j;
+    /* Vertical Wins */
     for (var i = 0; i < this.grid; i = i + 1) {
       for (j = 1; j < this.grid; j++) {
         if (this.state[i] != this.state[i + this.grid * j]) j = 1000;
       }
+      /* Randomly choosing j as 1000 to break out and check */
       if (j < 1000 && this.state[i] != "")
         return { winner: this.state[i], direction: "V", row: i + 1 };
     }
-
+    /* Horizontal Wins */
+    var k = 0;
     for (var i = 0; i <= this.state.length - this.grid + 1; i = i + this.grid) {
+      k++;
       for (j = 1; j < this.grid; j++) {
         if (this.state[i] != this.state[i + j]) j = 1000;
       }
       if (j < 1000 && this.state[i] != "")
-        return { winner: this.state[i], direction: "H", row: i + 1 };
+        return { winner: this.state[i], direction: "H", row: k };
     }
+    /* Diagonal Wins*/
     var i = 0;
     for (j = 0; j < this.state.length; j = j + (this.grid + 1)) {
       if (this.state[i] != this.state[j]) j = 1000;
