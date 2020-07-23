@@ -91,7 +91,7 @@ table tr td:last-child {
   margin-bottom: 5px;
   font-weight: bold;
   font-size: 15px;
-  color: rgb(216, 58, 71);
+  color: red;
 }
 a {
   margin-top: 100px;
