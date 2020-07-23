@@ -189,7 +189,7 @@ class State {
       document.querySelector(".endgame").style.display = "block";
       if (s == "sp")
         document.querySelector(".endgame .text").innerText =
-          winner == "O" ? "You win!" : "You lose! Better luck next time!";
+          winner == "O" ? "You win!" : "You lost! Better luck next time!";
       else
         document.querySelector(".endgame .text").innerText =
           winner == "O" ? "Player O wins!" : "Player X wins!";
