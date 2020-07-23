@@ -54,48 +54,42 @@ class State {
             }
           }
           if (_self.player_turn === "X") {
-            /* AI's Turn */ var state1 = _self.state.slice();
+            /* AI's Turn */
+            var state1 = _self.state.slice();
             var best1;
-            if (_self.max_depth === 1) {
-              /* If depth is 1,using random function */
-              var arr = _self.getAvailMoves();
-              var r = Math.floor(Math.random() * arr.length);
-              best1 = arr[r];
-            } else {
-              if (_self.algo === "minimax") {
-                /* Minimax algorithm */
-                /* Creating an object of the Minimax class.*/
-                var objc = new Minimax(
-                  state1,
-                  _self.max_depth,
-                  _self.player_turn,
-                  _self.grid
-                );
-                best1 = objc.bestMove();
-              } else if (_self.algo === "negamax") {
-                /* NegaMax algorithm */
-
-                if (_self.grid == 3) k = _self.max_depth;
-                /* Creating an object of the NegaMax class.*/
-                var objc = new NegaMax(
-                  state1,
-                  k,
-                  _self.player_turn,
-                  _self.grid
-                );
-                best1 = objc.begin();
-                if (_self.grid !== 3) k++;
-              } else if (_self.algo === "alphabeta") {
-                /* Minimax with Alpha Beta Pruning */
-                /* Creating an object of the Minimaxab class.*/
-                var objc = new Minimaxab(
-                  state1,
-                  _self.max_depth,
-                  _self.player_turn,
-                  _self.grid
-                );
-                best1 = objc.bestMoveab();
-              }
+            if (_self.algo === "minimax") {
+              /* Minimax algorithm */
+              /* Creating an object of the Minimax class.*/
+              var objc = new Minimax(
+                state1,
+                _self.max_depth,
+                _self.player_turn,
+                _self.grid
+              );
+              best1 = objc.bestMove();
+            } else if (_self.algo === "negamax") {
+              /* NegaMax algorithm */
+              if (
+                _self.grid == 3 ||
+                _self.max_depth == 1 ||
+                _self.max_depth == 2
+              )
+                k = _self.max_depth;
+              /* Creating an object of the NegaMax class.*/
+              var objc = new NegaMax(state1, k, _self.player_turn, _self.grid);
+              best1 = objc.begin();
+              /*Iterative Deepening */
+              if (_self.grid !== 3) k++;
+            } else if (_self.algo === "alphabeta") {
+              /* Minimax with Alpha Beta Pruning */
+              /* Creating an object of the Minimaxab class.*/
+              var objc = new Minimaxab(
+                state1,
+                _self.max_depth,
+                _self.player_turn,
+                _self.grid
+              );
+              best1 = objc.bestMoveab();
             }
             if (best1 < _self.state.length && _self.state[best1] === "") {
               _self.state[best1] = "X";
