@@ -189,7 +189,7 @@ class State {
       document.querySelector(".endgame").style.display = "block";
       if (s == "sp")
         document.querySelector(".endgame .text").innerText =
-          winner == "O" ? "You win!" : "You lose!";
+          winner == "O" ? "You win!" : "You lose! Better luck next time!";
       else
         document.querySelector(".endgame .text").innerText =
           winner == "O" ? "Player O wins!" : "Player X wins!";
@@ -201,6 +201,7 @@ class State {
     s.selectedIndex = 0;
     document.querySelector(".add").style.display = "block";
     document.querySelector(".singleplayer").style.display = "none";
+    document.querySelector(".new").style.display = "block";
   }
   isTerminal() {
     /* Check if board in terminal state that is winner found,tie or full*/

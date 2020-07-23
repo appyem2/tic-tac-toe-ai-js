@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", event => {
   document.querySelector(".singleplayer").style.display = "none";
   document.querySelector(".algorithm").style.display = "none";
   document.querySelector(".endgame").style.display = "none";
+  document.querySelector(".new").style.display = "block";
 });
 /*Function to add extra rows/columns for broader grid.*/
 function addtbl() {
@@ -44,6 +45,7 @@ function addtbl() {
 }
 /*Function to enable choosing correct option from drop down list. */
 function func() {
+  document.querySelector(".new").style.display = "none";
   var y = document.getElementById("add");
   y = y.options[y.selectedIndex].value;
   y = parseInt(y);

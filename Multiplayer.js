@@ -61,7 +61,7 @@ class Multiplayer {
       function helper() {
         var symbol = _self.player == "X" ? "O" : "X";
         /* Creating an object of the NegaMax class.*/
-        var objct = new NegaMax(_self.board, 5, symbol, _self.grid);
+        var objct = new NegaMax(_self.board, 3, symbol, _self.grid);
         /* Calling the begin() function of NegaMax class */
         var b = objct.begin();
         if (b !== "" && b >= 0 && b <= _self.grid * _self.grid - 1) {
