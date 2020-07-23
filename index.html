@@ -1,50 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <!--<link rel="stylesheet" href="style.css" /> -->
-  </head>
 
-  <body>
-    <div id="board">
-      <table>
-        <tr>
-          <td class="cell" id="0"></td>
-          <td class="cell" id="1"></td>
-          <td class="cell" id="2"></td>
-        </tr>
-        <tr>
-          <td class="cell" id="3"></td>
-          <td class="cell" id="4"></td>
-          <td class="cell" id="5"></td>
-        </tr>
-        <tr>
-          <td class="cell" id="6"></td>
-          <td class="cell" id="7"></td>
-          <td class="cell" id="8"></td>
-        </tr>
-      </table>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-    <br /><br />
-    <select id="starting">
-      <option value="1">Human</option>
-      <option value="0">Computer</option>
-    </select>
-    <select id="depth">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="-1">Unlimited</option>
-    </select>
+<body>
 
+
+  <h1>Tic-Tac-Toe
+    <br>
     <div class="endgame">
       <div class="text"></div>
     </div>
-    <button id="newgame">New Game</button>
-  </body>
+    </div>
+  </h1>
+
+  <div id="board">
+    <table id="my-table">
+      <tr>
+        <td class="cell" id="0"></td>
+        <td class="cell" id="1"></td>
+        <td class="cell" id="2"></td>
+      </tr>
+      <tr>
+        <td class="cell" id="3"></td>
+        <td class="cell" id="4"></td>
+        <td class="cell" id="5"></td>
+      </tr>
+      <tr>
+        <td class="cell" id="6"></td>
+        <td class="cell" id="7"></td>
+        <td class="cell" id="8"></td>
+      </tr>
+    </table>
+  </div>
+
+
+
+  <div id="left">
+    <div class="add">
+      <h3>Grid Size</h3>
+      <select id="add" onchange="addtbl()">
+        <option value="3">3x3</option>
+        <option value="4">4x4</option>
+        <option value="5">5x5</option>
+      </select>
+    </div>
+    <div class="player">
+      <h3>Players</h3>
+      <select id="player" onchange="func()">
+        <option value="" disabled selected>Select players</option>
+        <option value="sp">Single Player</option>
+        <option value="mp">Multiplayer</option>
+      </select>
+    </div>
+    <div class="helpbtn"><button id="help">Help</button> </div>
+    <div class="algorithm">
+      <h3>Algorithm</h3>
+      <select id="algo">
+        <option value="minimax">Minimax</option>
+        <option value="alphabeta">Minimax with alpha beta pruning</option>
+        <option value="negamax">NegaMax with Iterative Deepening</option>
+      </select>
+    </div>
+    <div class="singleplayer">
+      <h3>Starting Player</h3>
+      <select id="starting">
+        <option value="O">Human</option>
+        <option value="X">Computer</option>
+      </select>
+      <h3>Depth</h3>
+      <select id="depth">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="100">Unlimited</option>
+      </select>
+      <br>
+      <br>
+      <br>
+      <button id="newgame">New Game</button>
+      <br>
+      <h4>Press New Game to start</h4>
+    </div>
+    <div class="viewal">
+      <div class="txt"></div>
+    </div>
+  </div>
+  <script src="state.js"></script>
+  <script src="Multiplayer.js"></script>
+  <script src="Minimax.js"></script>
+  <script src="control.js"></script>
+</body>
+
 </html>
