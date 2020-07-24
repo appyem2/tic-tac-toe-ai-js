@@ -38,7 +38,7 @@ h1 {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 70%;
+  width: 65%;
 }
 select {
   background-color: lightgrey;
@@ -58,7 +58,7 @@ button {
 }
 td {
   border: 10px solid black;
-  height: 170px;
+  height: 180px;
   width: 100px;
   text-align: center;
   vertical-align: middle;
@@ -70,7 +70,7 @@ td {
 table {
   border-collapse: collapse;
   margin: auto;
-  width: 70%;
+  width: 65%;
 }
 table tr:first-child td {
   border-top: 0;
