@@ -58,7 +58,7 @@ button {
 }
 td {
   border: 10px solid black;
-  height: 180px;
+  height: 200px;
   width: 100px;
   text-align: center;
   vertical-align: middle;
@@ -70,7 +70,7 @@ td {
 table {
   border-collapse: collapse;
   margin: auto;
-  width: 65%;
+  /*width: 70%;*/
 }
 table tr:first-child td {
   border-top: 0;
