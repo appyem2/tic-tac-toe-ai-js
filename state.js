@@ -151,7 +151,7 @@ class State {
     var x = document.querySelectorAll(".cell");
     if (winner == "draw") {
       for (var i = 0; i < x.length; i++) {
-        x[i].style.backgroundColor = "grey";
+        x[i].style.backgroundColor = "white";
       }
       document.querySelector(".endgame").style.display = "block";
       document.querySelector(".endgame .text").style.display = "block";
@@ -181,7 +181,7 @@ class State {
         }
       }
       for (var k = 1; k <= this.grid; k++) {
-        document.getElementById(j).style.backgroundColor = "grey";
+        document.getElementById(j).style.backgroundColor = "white";
         j += i;
       }
       var s = document.getElementById("player");

@@ -4,22 +4,24 @@ body {
 }
 h4 {
   margin-top: 40px;
-  font-size: 12px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: bolder;
   margin-left: 4px;
   position: fixed;
   color: black;
 }
 h3 {
   margin-bottom: 5px;
-  font-weight: bold;
-  font-size: 16px;
+  font-weight: bolder;
+  font-size: 20px;
 }
 h1 {
   margin: auto;
-  width: 50%;
+  width: 60%;
+  font-size: 40px;
   text-align: center;
   position: relative;
+  font-weight: bolder;
 }
 #left {
   float: left;
@@ -36,7 +38,7 @@ h1 {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 60%;
+  width: 80%;
 }
 select {
   background-color: lightgrey;
@@ -55,7 +57,7 @@ button {
   position: fixed;
 }
 td {
-  border: 2px solid #333;
+  border: 10px solid rgb(158, 150, 150);
   height: 120px;
   width: 100px;
   text-align: center;
@@ -91,7 +93,7 @@ table tr td:last-child {
 .new {
   margin-bottom: 5px;
   font-weight: bold;
-  font-size: 17px;
+  font-size: 20px;
   color: rgb(224, 82, 82);
 }
 a {
