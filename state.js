@@ -202,7 +202,7 @@ class State {
     s.selectedIndex = 0;
     document.querySelector(".add").style.display = "block";
     document.querySelector(".singleplayer").style.display = "none";
-    document.querySelector(".new").style.display = "block";
+    document.querySelector(".reset").style.display = "block";
   }
   isTerminal() {
     /* Check if board in terminal state that is winner found,tie or full*/

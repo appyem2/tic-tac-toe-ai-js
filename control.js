@@ -7,9 +7,12 @@ document.addEventListener("DOMContentLoaded", event => {
   document.querySelector(".algorithm").style.display = "none";
   document.querySelector(".endgame").style.display = "none";
   document.querySelector(".new").style.display = "block";
+  document.querySelector(".reset").style.display = "none";
 });
 /*Function to add extra rows/columns for broader grid.*/
 function addtbl() {
+  document.querySelector(".new").style.display = "block";
+  document.querySelector(".reset").style.display = "none";
   document.querySelector(".helpbtn").style.display = "none";
   document.querySelector(".singleplayer").style.display = "none";
   document.querySelector(".algorithm").style.display = "none";
@@ -44,7 +47,19 @@ function addtbl() {
   document.querySelector("#board").style.display = "block";
 }
 /*Function to enable choosing correct option from drop down list. */
+function reset() {
+  document.querySelector(".endgame .text").innerText = "";
+  document.querySelector(".endgame .text1").innerText = "";
+  cells = document.querySelectorAll(".cell");
+  for (var i = 0; i < cells.length; i++) {
+    cells[i].innerText = "";
+    cells[i].style.removeProperty("background-color");
+  }
+  document.querySelector(".reset").style.display = "none";
+  document.querySelector(".new").style.display = "block";
+}
 function func() {
+  document.querySelector(".reset").style.display = "none";
   document.querySelector(".endgame .text").innerText = "";
   document.querySelector(".endgame .text1").innerText = "";
   document.querySelector(".new").style.display = "none";
@@ -62,6 +77,7 @@ function func() {
     document.querySelector(".singleplayer").style.display = "none";
     document.querySelector(".helpbtn").style.display = "block";
     document.querySelector(".endgame").style.display = "none";
+    document.querySelector(".reset").style.display = "none";
     cells = document.querySelectorAll(".cell");
     for (var i = 0; i < cells.length; i++) {
       cells[i].innerText = "";
