@@ -36,9 +36,9 @@ h1 {
 #board {
   margin-top: 80px;
   display: block;
-  margin-left: auto;
+  margin-left: 120px;
   margin-right: auto;
-  width: 80%;
+  width: 90%;
 }
 select {
   background-color: lightgrey;
@@ -57,8 +57,8 @@ button {
   position: fixed;
 }
 td {
-  border: 10px solid rgb(158, 150, 150);
-  height: 120px;
+  border: 10px solid black;
+  height: 170px;
   width: 100px;
   text-align: center;
   vertical-align: middle;
@@ -69,7 +69,7 @@ td {
 table {
   border-collapse: collapse;
   margin: auto;
-  width: 60%;
+  width: 70%;
 }
 table tr:first-child td {
   border-top: 0;
@@ -97,7 +97,7 @@ table tr td:last-child {
   color: rgb(224, 82, 82);
 }
 a {
-  margin-top: 100px;
+  margin-top: 200px;
   font-size: 12px;
   font-weight: bold;
   margin-left: 35px;
