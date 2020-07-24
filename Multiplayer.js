@@ -35,8 +35,10 @@ class Multiplayer {
             p = _self.player == "X" ? "O" : "X";
             _self.board[index] = p;
             document.getElementById(index).innerText = p;
-            if (p === "X") document.getElementById(index).style.color = "white";
-            else document.getElementById(index).style.color = "black";
+            if (p === "X")
+              document.getElementById(index).style.color = "#1f74ad";
+            else
+              document.getElementById(index).style.color = "rgb(224, 82, 82)";
             /* Checking if terminal state */
             if (obj.isTerminal()) {
               document

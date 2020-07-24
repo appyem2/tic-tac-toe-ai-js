@@ -1,5 +1,5 @@
 body {
-  background: linear-gradient(to right, #757f9a, #d7dde8);
+  background: linear-gradient(to right, #acb6e5, #86fde8);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 h4 {
@@ -48,7 +48,7 @@ button {
   line-height: 44px;
   text-decoration: none;
   color: black;
-  background-color: grey;
+  background-color: rgb(224, 82, 82);
   border-radius: 4px;
   font-weight: bold;
   font-size: 20px;
@@ -92,7 +92,7 @@ table tr td:last-child {
   margin-bottom: 5px;
   font-weight: bold;
   font-size: 17px;
-  color: rgb(58, 55, 55);
+  color: rgb(224, 82, 82);
 }
 a {
   margin-top: 100px;

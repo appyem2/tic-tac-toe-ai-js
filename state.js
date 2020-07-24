@@ -25,7 +25,7 @@ class State {
       var idx = Math.floor(Math.random() * psbl.length);
       this.state[psbl[idx]] = "X";
       document.getElementById(psbl[idx]).innerText = "X";
-      document.getElementById(psbl[idx]).style.color = "white";
+      document.getElementById(psbl[idx]).style.color = "rgb(224, 82, 82)";
       this.player_turn = "O";
     }
     var _self = this;
@@ -44,7 +44,7 @@ class State {
               _self.state[index] = "O";
 
               document.getElementById(index).innerText = "O";
-              document.getElementById(index).style.color = "black";
+              document.getElementById(index).style.color = "#1f74ad";
               document.querySelector(".endgame .text1").style.display = "none";
             }
             if (_self.isTerminal()) {
@@ -98,7 +98,7 @@ class State {
             if (best1 < _self.state.length && _self.state[best1] === "") {
               _self.state[best1] = "X";
               document.getElementById(best1).innerText = "X";
-              document.getElementById(best1).style.color = "white";
+              document.getElementById(best1).style.color = "rgb(224, 82, 82)";
             }
             _self.player_turn = "O";
             if (_self.isTerminal()) {
@@ -155,7 +155,7 @@ class State {
       }
       document.querySelector(".endgame").style.display = "block";
       document.querySelector(".endgame .text").style.display = "block";
-      document.querySelector(".endgame .text").innerText = "Draw";
+      document.querySelector(".endgame .text").innerText = "Draw!";
     } else {
       var j, i;
       /* Horizontal wins*/
