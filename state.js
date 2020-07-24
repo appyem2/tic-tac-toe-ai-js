@@ -25,11 +25,13 @@ class State {
       var idx = Math.floor(Math.random() * psbl.length);
       this.state[psbl[idx]] = "X";
       document.getElementById(psbl[idx]).innerText = "X";
+      document.getElementById(psbl[idx]).style.color = "white";
       this.player_turn = "O";
     }
     var _self = this;
     var k = 1;
     var x = document.querySelectorAll(".cell");
+
     // Sensor
     x.forEach((cell, index) => {
       x[index].addEventListener(
@@ -42,6 +44,8 @@ class State {
               _self.state[index] = "O";
 
               document.getElementById(index).innerText = "O";
+              document.getElementById(index).style.color = "black";
+              document.querySelector(".endgame .text1").style.display = "none";
             }
             if (_self.isTerminal()) {
               /* Checking if terminal*/
@@ -94,6 +98,7 @@ class State {
             if (best1 < _self.state.length && _self.state[best1] === "") {
               _self.state[best1] = "X";
               document.getElementById(best1).innerText = "X";
+              document.getElementById(best1).style.color = "white";
             }
             _self.player_turn = "O";
             if (_self.isTerminal()) {
@@ -149,6 +154,7 @@ class State {
         x[i].style.backgroundColor = "grey";
       }
       document.querySelector(".endgame").style.display = "block";
+      document.querySelector(".endgame .text").style.display = "block";
       document.querySelector(".endgame .text").innerText = "Draw";
     } else {
       var j, i;
@@ -181,6 +187,7 @@ class State {
       var s = document.getElementById("player");
       s = s.options[s.selectedIndex].value;
       document.querySelector(".endgame").style.display = "block";
+      document.querySelector(".endgame .text").style.display = "block";
       if (s == "sp")
         document.querySelector(".endgame .text").innerText =
           winner == "O" ? "You win!" : "You lost! Better luck next time!";

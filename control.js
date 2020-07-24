@@ -45,6 +45,8 @@ function addtbl() {
 }
 /*Function to enable choosing correct option from drop down list. */
 function func() {
+  document.querySelector(".endgame .text").innerText = "";
+  document.querySelector(".endgame .text1").innerText = "";
   document.querySelector(".new").style.display = "none";
   var y = document.getElementById("add");
   y = y.options[y.selectedIndex].value;
@@ -75,6 +77,7 @@ function func() {
     document.querySelector(".player").style.display = "block";
     document.querySelector(".helpbtn").style.display = "none";
     document.querySelector(".singleplayer").style.display = "block";
+    document.querySelector(".endgame").style.display = "none";
     if (y === 3) document.querySelector(".algorithm").style.display = "block";
   }
 }
@@ -93,7 +96,6 @@ document.getElementById("newgame").addEventListener("click", function() {
   depth = document.getElementById("depth");
   depth = depth.options[depth.selectedIndex].value;
   var x = document.querySelectorAll(".cell");
-  document.querySelector(".endgame").style.display = "none";
   for (var i = 0; i < x.length; i++) {
     x[i].innerText = "";
     x[i].style.removeProperty("background-color");
@@ -101,13 +103,21 @@ document.getElementById("newgame").addEventListener("click", function() {
   document.querySelector(".singleplayer").style.display = "none";
   document.querySelector(".algorithm").style.display = "none";
   y = parseInt(y);
+  document.querySelector(".endgame").style.display = "block";
+
   if (y !== 3 && depth == 100) {
-    document.querySelector(".endgame").style.display = "block";
     document.querySelector(".endgame .text").innerText =
       "NegaMax with Iterative Deepening!";
   } else if (y === 3 && depth == 100) {
-    document.querySelector(".endgame").style.display = "block";
     document.querySelector(".endgame .text").innerText = t;
+  } else {
+    document.querySelector(".endgame .text").style.display = "none";
+  }
+  if (starting != "X") {
+    document.querySelector(".endgame .text1").style.display = "block";
+    document.querySelector(".endgame .text1").innerText = "Your Turn!";
+  } else {
+    document.querySelector(".endgame .text1").style.display = "none";
   }
   var state = new Array(y * y);
   state.fill("", 0);
